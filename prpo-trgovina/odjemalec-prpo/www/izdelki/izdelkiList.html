@@ -1,0 +1,118 @@
+<!--<a ui-sref="newMovie" class="btn-primary btn-lg nodecoration">Add New Movie</a>-->
+<h3>Vsi izdelki</h3>
+{{vsiIzdelki}}
+<md-button ng-click="sort = !sort" class="md-raised">Sortiranje</md-button>
+<md-card ng-show="sort">
+	<md-card-content>
+		<span>Sortiraj po:</span>
+		<md-menu>
+		 <!-- Trigger element is a md-button with an icon -->
+		 <md-button ng-click="$mdOpenMenu($event)" class="md-raised">
+		   {{order}}
+		 </md-button>
+		 <md-menu-content>
+		   <md-menu-item><md-button ng-click="setOrder('id')">Id</md-button></md-menu-item>
+		   <md-menu-item><md-button ng-click="setOrder('ime')">Ime</md-button></md-menu-item>
+		   <md-menu-item><md-button ng-click="setOrder('kategorija')">Kategorija</md-button></md-menu-item>
+		   <md-menu-item><md-button ng-click="setOrder('cena')">Cena</md-button></md-menu-item>
+		   <md-menu-item><md-button ng-click="setOrder('zaloga')">Zaloga</md-button></md-menu-item>
+		   <md-menu-item><md-button ng-click="setOrder('davek')">Davek</md-button></md-menu-item>
+		   <md-menu-item><md-button ng-click="setOrder('datum')">Datum</md-button></md-menu-item>
+		 </md-menu-content>
+		</md-menu>
+		<md-menu>
+		 <!-- Trigger element is a md-button with an icon -->
+		 <md-button ng-click="$mdOpenMenu($event)" class="md-raised">
+		   {{ascending == "asc" ? "Naraščajoče" : "Padajoče"}}
+		 </md-button>
+		 <md-menu-content>
+		   <md-menu-item><md-button ng-click="setAscending('ASC')">Naraščajoče</md-button></md-menu-item>
+		   <md-menu-item><md-button ng-click="setAscending('DESC')">Padajoče</md-button></md-menu-item>
+		 </md-menu-content>
+		</md-menu>
+	</md-card-content>
+</md-card>
+
+<md-button ng-click="advancedSearch = !advancedSearch" class="md-raised">Napredno iskanje</md-button>
+<md-card ng-show="advancedSearch">
+	<p>Napredno iskanje:</p>
+	<md-card-content>
+		<div>
+			<md-input-container>
+	        	<label>Naziv</label>
+	            <input ng-model="searchIme">
+	        </md-input-container>
+        </div>
+        <div>
+	        <md-input-container>
+	        	<label>Kategorija</label>
+	            <input ng-model="searchKategorija">
+	        </md-input-container>
+        </div>
+        <div layout="row" layout-align="none center">
+        	<md-menu>
+			 <!-- Trigger element is a md-button with an icon -->
+			 <md-button ng-click="$mdOpenMenu($event)" class="md-raised">
+			   {{cenaPredznak == "eq" ? "Enako" : cenaPredznak == "lte" ? "Manjše od" : "Večje od"}}
+			 </md-button>
+			 <md-menu-content>
+			   <md-menu-item><md-button ng-click="setCenaPredznak('lte')">Manjše od</md-button></md-menu-item>
+			   <md-menu-item><md-button ng-click="setCenaPredznak('eq')">Enako</md-button></md-menu-item>
+			   <md-menu-item><md-button ng-click="setCenaPredznak('gte')">Večje od</md-button></md-menu-item>
+			 </md-menu-content>
+			</md-menu>
+          <md-input-container>
+            <label>Cena (v €)</label>
+            <input ng-model="searchCena"
+                   type="number" step="0.01" min="0">
+          </md-input-container>
+      	</div>
+      	<div layout="row" layout-align="none center">
+      		<md-menu>
+				<!-- Trigger element is a md-button with an icon -->
+				<md-button ng-click="$mdOpenMenu($event)" class="md-raised">
+				   {{datumPredznak == "lte" ? "Pred" : "Po"}}
+				</md-button>
+				 <md-menu-content>
+				   <md-menu-item><md-button ng-click="setDatumPredznak('lte')">Pred</md-button></md-menu-item>
+				   <md-menu-item><md-button ng-click="setDatumPredznak('gte')">Po</md-button></md-menu-item>
+				 </md-menu-content>
+				</md-menu>
+			<md-datepicker ng-model="datumSearch" md-placeholder="Vnesite datum"></md-datepicker>
+		</div>
+      	<md-card-actions layout="row" layout-align="end center">
+		<md-button class="md-raised" ng-click="naprednoIskanje()">Išči</md-button>
+	</md-card-content>
+</md-card>
+
+<md-card ng-repeat="izdelek in izdelki">
+	<div style="width:500px">
+		<img ng-src="{{izdelek.slika?izdelek.slika:'http://dsksic.com/images/industry/isd_product.jpg'}}" class="md-card-image" alt="Washed Out">
+	</div>
+	<md-toolbar class="md-warn" ng-show="izdelek.zaloga<=0">
+   		<div class="md-toolbar-tools">
+      		<h2 class="md-flex">Ni na zalogi</h2>
+    	</div>
+  	</md-toolbar>
+	<md-card-title>
+		<md-card-title-text>
+			<span class="md-headline">{{izdelek.ime | uppercase}} ({{izdelek.cena | currency : '' }} €)</span>
+            {{izdelek.kategorija}}
+		</md-card-title-text>
+	</md-card-title>
+	<md-card-content>
+		<p>
+			{{izdelek.opis}}
+            {{izdelek.id}}
+		</p>
+	</md-card-content>
+		<md-card-actions layout="row" layout-align="end center">
+		<md-button class="md-raised" ng-href="#!/izdelek/{{izdelek.id}}">Poglej</md-button>
+	</md-card-actions>
+</md-card>
+
+<div>
+    <section layout="row" layout-sm="column" layout-align="center center" ng-hide="vsiIzdelki.length == 0">
+      <md-button class="groupX" ng-class="whatClassIsIt(it)" ng-repeat="it in pages" ng-click="loadFunction(it)">{{it}}</md-button>
+    </section>
+</div>

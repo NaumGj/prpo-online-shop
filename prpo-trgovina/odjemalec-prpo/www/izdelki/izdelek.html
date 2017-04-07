@@ -1,0 +1,40 @@
+<div>
+  <h3>Podrobnosti za {{izdelek.ime}}</h3>
+    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+    <md-button class="md-raised md-primary" ng-href="#!/izdelek/{{izdelek.id}}/edit">Uredi</md-button>
+    <md-button class="md-raised md-warn" ng-click="showConfirm($event)">Izbriši</md-button>
+  </section>
+</div>
+<div style="width:500px">
+    <img ng-src="{{izdelek.slika?izdelek.slika:'http://dsksic.com/images/industry/isd_product.jpg'}}" class="md-card-image" width="500px" alt="Washed Out">
+  </div>
+<table class="table movietable">
+  <tr>
+    <td>Izdelek id</td>
+    <td>{{izdelek.id}}</td>
+  </tr>
+  <tr>
+    <td>Ime</td>
+    <td>{{izdelek.ime}}</td>
+  </tr>
+  <tr>
+    <td>Kategorija</td>
+    <td>{{izdelek.kategorija}}</td>
+  </tr>
+  <tr>
+    <td>Cena</td>
+    <td>{{izdelek.cena | currency : '' : 2 }} €</td>
+  </tr>
+  <tr>
+    <td>Opis</td>
+    <td>{{izdelek.opis}}</td>
+  </tr>
+  <tr>
+    <td>Zaloga</td>
+    <td>{{izdelek.zaloga}}</td>
+  </tr>
+  <tr>
+    <td>Datum vpisa</td>
+    <td>{{izdelek.datum?izdelek.datum:1288323623006  | date:'dd.MM.yyyy'}}</td>
+  </tr>
+</table>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://prpo.fri.si/sheme/izdelki/v1"
+	xmlns:tns="http://prpo.fri.si/sheme/izdelki/v1"
+	elementFormDefault="qualified">
+
+	<complexType name="IzdelkiType">
+		<sequence>
+			<element name="id" type="int" minOccurs="0" maxOccurs="1" />
+			<element name="ime" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="kategorija" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="cena" type="double" minOccurs="0" maxOccurs="1" />
+			<element name="zaloga" type="int" minOccurs="0" maxOccurs="1" />
+			<element name="opis" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="davek" type="double" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+
+</schema>
+

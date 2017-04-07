@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://prpo.fri.si/storitve/izdelki/v1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="izdelki"
+	targetNamespace="http://prpo.fri.si/storitve/izdelki/v1">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://prpo.fri.si/storitve/izdelki/v1"
+			xmlns:tns="http://prpo.fri.si/storitve/izdelki/v1"
+			xmlns:sporocila="http://prpo.fri.si/sheme/izdelki/sporocila/v1">
+			<xsd:import
+				schemaLocation="../../../sheme/izdelki/sporocila/v1/izdelkiSporocila.xsd"
+				namespace="http://prpo.fri.si/sheme/izdelki/sporocila/v1" />
+
+			<!-- za storitev vracanja enege izdelka po id-ju -->
+			<xsd:element name="vrniIzdelekRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="input"
+							type="sporocila:VrniIzdelekZahtevaSporocilo" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="vrniIzdelekResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="output"
+							type="sporocila:VrniIzdelekOdgovorSporocilo" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="vrniIzdelekFault">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="fault"
+							type="sporocila:VrniIzdelekFaultSporocilo" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- za storitev vracanja vseh izdelkov-->
+			<xsd:element name="vrniIzdelekeRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="input"
+							type="sporocila:VrniIzdelekeZahtevaSporocilo" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="vrniIzdelekeResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="output"
+							type="sporocila:VrniIzdelekeOdgovorSporocilo" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- za storitev vracanja enege izdelka po id-ju -->
+	<wsdl:message name="vrniIzdelek">
+		<wsdl:part element="tns:vrniIzdelekRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="vrniIzdelekResponse">
+		<wsdl:part element="tns:vrniIzdelekResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="vrniIzdelekFault">
+		<wsdl:part element="tns:vrniIzdelekFault" name="parameters" />
+	</wsdl:message>
+
+
+	<!-- za storitev vracanja vseh izdelkov-->
+	<wsdl:message name="vrniIzdeleke">
+		<wsdl:part element="tns:vrniIzdelekeRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="vrniIzdelekeResponse">
+		<wsdl:part element="tns:vrniIzdelekeResponse" name="parameters" />
+	</wsdl:message>
+
+
+	<wsdl:portType name="izdelkiPort">
+		<wsdl:operation name="vrniIzdelek">
+			<wsdl:input message="tns:vrniIzdelek" />
+			<wsdl:output message="tns:vrniIzdelekResponse" />
+			<wsdl:fault name="izdelekFault" message="tns:vrniIzdelekFault"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="vrniIzdeleke">
+			<wsdl:input message="tns:vrniIzdeleke" />
+			<wsdl:output message="tns:vrniIzdelekeResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+
+
+	<wsdl:binding name="izdelkiSOAPbinding" type="tns:izdelkiPort">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="vrniIzdelek">
+			<soap:operation soapAction="http://prpo.fri.si/storitve/izdelki/v1" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="izdelekFault">
+				<soap:fault name="izdelekFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="vrniIzdeleke">
+			<soap:operation soapAction="http://prpo.fri.si/storitve/izdelki/v1" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="izdelki">
+		<wsdl:port binding="tns:izdelkiSOAPbinding" name="izdelkiSOAP">
+			<soap:address location="v1/izdelki" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,66 @@
+<style>
+    md-input-container {
+        min-width: 100%;
+    }
+</style>
+<h3>Uredi izdelek {{izdelek.ime}}</h3>
+<div style="width:500px">
+    <img ng-src="{{izdelek.slika?izdelek.slika:'http://dsksic.com/images/industry/isd_product.jpg'}}" class="md-card-image" width="500px" alt="Washed Out">
+  </div>
+  <div>
+    <md-input-container>
+        <label>Izdelek Id</label>
+        <input ng-model="izdelek.id" disabled>
+      </md-input-container>
+  </div>
+  <div>
+      <md-input-container>
+        <label>Naziv</label>
+        <input ng-model="izdelek.ime">
+      </md-input-container>
+  </div>
+  <div>
+      <md-input-container>
+        <label>Kategorija</label>
+        <input ng-model="izdelek.kategorija">
+      </md-input-container>
+  </div>
+  <div>
+      <md-input-container>
+        <label>Cena (v €)</label>
+        <input ng-model="izdelek.cena"
+               type="number" step="0.01">
+      </md-input-container>
+  </div>
+  <div>
+      <md-input-container>
+        <label>Opis</label>
+        <input ng-model="izdelek.opis"/>
+      </md-input-container>
+  </div>
+  <div>
+      <md-input-container>
+        <label>Zaloga</label>
+        <input ng-model="izdelek.zaloga"
+               type="number" name="izdelek.zaloga"
+               min="0" max="5000" integer>
+      </md-input-container>
+  </div>
+  <div>
+      <md-input-container>
+        <label>URL slike</label>
+        <input ng-model="izdelek.slika">
+      </md-input-container>
+  </div>
+  <md-toolbar class="md-raised md-warn" ng-show="editIzdelekCheck()==false">
+        <div class="md-toolbar-tools md-warn">
+            <h2 class="md-flex">{{opozorilo}}</h2>
+        </div>
+  </md-toolbar>
+
+<div>
+  <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+    <md-button class="md-raised md-primary" ng-click="urediIzdelek()" ng-disabled="editIzdelekCheck()==false">Uredi</md-button>
+    <md-button class="md-raised md-warn" ng-href="#!/izdelek/{{izdelek.id}}">Prekini</md-button>
+  </section>
+</div>

@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>si.fri.prpo05</groupId>
+    <artifactId>prpo-trgovina</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>prpo-trgovina-remote-ejb</artifactId>
+  
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.wildfly</groupId>
+        <artifactId>wildfly-ejb-client-bom</artifactId>
+        <version>9.0.1.Final</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+  <dependencies>
+  	<!-- Dependencies on our modules -->
+  	<dependency>
+      <groupId>si.fri.prpo05</groupId>
+      <artifactId>prpo-trgovina-storitve</artifactId>
+      <type>ejb</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>si.fri.prpo05</groupId>
+      <artifactId>prpo-trgovina-vmesniki-ejb</artifactId>
+      <type>jar</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>si.fri.prpo05</groupId>
+      <artifactId>prpo-trgovina-vmesniki</artifactId>
+      <type>pom</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>si.fri.prpo05</groupId>
+      <artifactId>prpo-trgovina-jpa</artifactId>
+      <type>jar</type>
+      <scope>provided</scope>
+    </dependency>
+    
+    <!-- JBoss remote naming -->
+    <dependency>
+      <groupId>org.jboss</groupId>
+      <artifactId>jboss-remote-naming</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    
+    <!-- xnio dependency -->
+    <dependency>
+      <groupId>org.jboss.xnio</groupId>
+      <artifactId>xnio-nio</artifactId>
+      <scope>provided</scope>
+    </dependency>
+ 
+ 	<!-- JavaEE dependency -->
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>7.0</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+</project>

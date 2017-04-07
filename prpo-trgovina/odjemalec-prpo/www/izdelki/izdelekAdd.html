@@ -1,0 +1,65 @@
+<h3>Dodaj novo izposojo </h3>
+<form>
+	<div>
+		<md-datepicker ng-model="izdelek.datum" md-placeholder="Vnesite datum"  md-min-date="minDate"></md-datepicker>
+	</div>
+      <div>
+          <md-input-container>
+            <label>Naziv</label>
+            <input ng-model="izdelek.ime">
+          </md-input-container>
+      </div>
+      <div>
+          <md-input-container>
+            <label>Kategorija</label>
+            <input ng-model="izdelek.kategorija">
+          </md-input-container>
+      </div>
+      <div>
+          <md-input-container>
+            <label>Cena (v €)</label>
+            <input ng-model="izdelek.cena"
+                   type="number" step="0.01" min="0">
+          </md-input-container>
+      </div>
+      <div>
+          <md-input-container>
+            <label>Opis</label>
+            <input ng-model="izdelek.opis">
+          </md-input-container>
+      </div>
+      <div>
+          <md-input-container>
+            <label>Zaloga</label>
+            <input ng-model="izdelek.zaloga"
+                   type="number" name="izdelek.zaloga"
+           min="0" max="5000" integer />
+          </md-input-container>
+      </div>
+      <div>
+          <md-input-container>
+            <label>URL slike</label>
+            <input ng-model="izdelek.slika">
+          </md-input-container>
+      </div>
+      <div>
+          <md-input-container>
+            <label>Davek</label>
+            <input ng-model="izdelek.davek"
+                   type="number" step="0.01">
+          </md-input-container>
+      </div>
+      <stikalo></stikalo>
+      <md-toolbar class="md-raised md-warn" ng-show="saveIzdelekCheck()==false&&opozorilo!='Opozorilo'">
+            <div class="md-toolbar-tools md-warn">
+                <h2 class="md-flex">{{opozorilo}}</h2>
+            </div>
+      </md-toolbar>
+    
+	<div>
+		<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+			<md-button class="md-raised md-primary" ng-click="saveIzdelek(izdelek)" ng-disabled="saveIzdelekCheck()==false">Shrani</md-button>
+			<md-button class="md-raised md-warn" ng-href="#!/izdelki">Prekini</md-button>
+		</section>
+	</div>
+</form>
